@@ -20,27 +20,40 @@ function CustomDrawer(props) {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
     >
-      <DrawerContentScrollView {...props}>
+      <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
         <View style={styles.headerContainer}>
           <MaterialCommunityIcons name="leaf" size={24} color="black" />
           <Text style={styles.headerText}>Truy xuất nguồn gốc</Text>
         </View>
-        <DrawerItem
-          label="Dashboard"
-          onPress={() => props.navigation.navigate("Dashboard")}
-          icon={({ size, color }) => (
-            <AntDesign name="dashboard" color={color} size={18} />
-          )}
-          labelStyle={{ marginLeft: -16 }}
-        />
-        <DrawerItem
-          label="Device"
-          onPress={() => props.navigation.navigate("Device")}
-          icon={({ size, color }) => (
-            <MaterialIcons name="devices" size={18} color={color} />
-          )}
-          labelStyle={{ marginLeft: -16 }}
-        />
+        <View style={{ flex: 1 }}>
+          {/* <DrawerItem
+            label="Dashboard"
+            onPress={() => props.navigation.navigate("Dashboard")}
+            icon={({ size, color }) => (
+              <AntDesign name="dashboard" color={color} size={18} />
+            )}
+            labelStyle={{ marginLeft: -16 }}
+          />
+          <DrawerItem
+            label="Device"
+            onPress={() => props.navigation.navigate("Device")}
+            icon={({ size, color }) => (
+              <MaterialIcons name="devices" size={18} color={color} />
+            )}
+            labelStyle={{ marginLeft: -16 }}
+          /> */}
+          <DrawerItemList {...props} />
+        </View>
+        <View>
+          <DrawerItem
+            label="Logout"
+            onPress={() => alert("Are you sure to logout?")}
+            icon={({ size, color }) => (
+              <AntDesign name="logout" size={14} color={color} />
+            )}
+            labelStyle={{ marginLeft: -20 }}
+          />
+        </View>
       </DrawerContentScrollView>
     </LinearGradient>
   );
@@ -53,7 +66,6 @@ const styles = StyleSheet.create({
     padding: 6,
     margin: 6,
     flexDirection: "row",
-    flex: 1,
   },
   headerText: {
     fontWeight: "bold",

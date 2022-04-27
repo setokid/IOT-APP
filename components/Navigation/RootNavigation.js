@@ -1,65 +1,72 @@
-import { useState } from "react";
-import { Pressable } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Ionicons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 
 import Dashboard from "../../screens/Dashboard";
 import Device from "../../screens/Device";
 import CustomDrawer from "./CustomDrawer";
-import Animated from "react-native-reanimated";
+import IconRight from "./IconRight";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function Screen({ navigation }) {
   return (
-    <Stack.Navigator
+    <Drawer.Navigator
       screenOptions={{
-        headerTransparent: true,
-        headerTitle: null,
-        headerLeft: () => (
-          <Pressable onPress={() => navigation.toggleDrawer()}>
-            <Ionicons name="md-menu" size={24} color="black" />
-          </Pressable>
-        ),
+        headerShown: true,
+        headerTitle: "",
+        drawerActiveBackgroundColor: "white",
+        drawerActiveTintColor: "black",
+        headerRight: () => <IconRight />,
+        drawerStyle: { width: "50%" },
       }}
+      drawerContent={(props) => {
+        return <CustomDrawer {...props} />;
+      }}
+      initialRouteName="Dashboard"
     >
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-      <Stack.Screen name="Device" component={Device} />
-    </Stack.Navigator>
+      <Drawer.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          drawerIcon: (color, size) => (
+            <AntDesign
+              name="dashboard"
+              color={color}
+              size={size}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Device"
+        component={Device}
+        options={{
+          drawerIcon: (color, size) => (
+            <MaterialIcons
+              name="devices"
+              color={color}
+              size={size}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
 
 function RootNavigation() {
-  const [progress, setProgress] = useState(new Animated.Value(0));
-
-  const scale = Animated.interpolate(progress, {
-    inputRange: [0, 1],
-    outputRange: [1, 0.8],
-  });
-
-  const borderRadius = Animated.interpolate(progress, {
-    inputRange: [0, 1],
-    outputRange: [0, 10],
-  });
-
-  const animatedStyle = { borderRadius, transform: [{ scale }] };
-
   return (
-    <Drawer.Navigator
-      drawerContent={(props) => {
-        setProgress(props.progress);
-        return <CustomDrawer {...props} />;
-      }}
-    >
-      <Drawer.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="Screens"
         component={Screen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: false }}
       />
-    </Drawer.Navigator>
+    </Stack.Navigator>
   );
 }
 
