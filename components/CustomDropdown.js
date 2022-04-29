@@ -9,7 +9,7 @@ function CustomDropdown({ menuHandler }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          menuHandler(), navigation.navigate("Device");
+          menuHandler(), navigation.navigate("User");
         }}
       >
         <View style={styles.itemView}>

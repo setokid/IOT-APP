@@ -6,11 +6,12 @@ import Dashboard from "../../screens/Dashboard";
 import Device from "../../screens/Device";
 import CustomDrawer from "./CustomDrawer";
 import IconRight from "./IconRight";
+import User from "../../screens/User";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function Screen({ navigation }) {
+function Screen({}) {
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -19,7 +20,7 @@ function Screen({ navigation }) {
         drawerActiveBackgroundColor: "white",
         drawerActiveTintColor: "black",
         headerRight: () => <IconRight />,
-        drawerStyle: { width: "50%" },
+        drawerStyle: { width: "55%" },
       }}
       drawerContent={(props) => {
         return <CustomDrawer {...props} />;
@@ -47,6 +48,20 @@ function Screen({ navigation }) {
           drawerIcon: (color, size) => (
             <MaterialIcons
               name="devices"
+              color={color}
+              size={size}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="User"
+        component={User}
+        options={{
+          drawerIcon: (color, size) => (
+            <MaterialIcons
+              name="account-circle"
               color={color}
               size={size}
               style={{ marginRight: -20 }}
