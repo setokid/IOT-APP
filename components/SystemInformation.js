@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native";
 
 import CustomCard from "./UI/CustomCard";
 
-function SystemInformation() {
+function SystemInformation({ device }) {
   return (
     <View style={styles.container}>
       <CustomCard
@@ -13,7 +13,7 @@ function SystemInformation() {
         iconColor={"#ff0000"}
         iconName={"account-multiple"}
         text={"Người dùng"}
-        data={0}
+        data={device}
       />
       <CustomCard
         color1={"#00ff00"}
@@ -23,7 +23,7 @@ function SystemInformation() {
         iconColor={"#00ff00"}
         iconName={"leaf"}
         text={"Đợt gieo trồng"}
-        data={1}
+        data={0}
       />
       <CustomCard
         color1={"#1ea7db"}
@@ -33,7 +33,7 @@ function SystemInformation() {
         iconColor={"#1ea7db"}
         iconName={"devices"}
         text={"Thiết bị"}
-        data={2}
+        data={0}
       />
       <CustomCard
         color1={"#ec6302"}
@@ -43,7 +43,7 @@ function SystemInformation() {
         iconColor={"#ec6302"}
         iconName={"check-all"}
         text={"Thu hoạch"}
-        data={3}
+        data={0}
       />
     </View>
   );
