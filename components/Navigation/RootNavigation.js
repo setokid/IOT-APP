@@ -7,6 +7,7 @@ import Device from "../../screens/Device";
 import CustomDrawer from "./CustomDrawer";
 import IconRight from "./IconRight";
 import User from "../../screens/User";
+import DeviceDetails from "../../screens/DeviceDetails";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -75,11 +76,16 @@ function Screen({}) {
 
 function RootNavigation() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Screens">
       <Stack.Screen
         name="Screens"
         component={Screen}
         options={{ headerShown: false, title: false }}
+      />
+      <Stack.Screen
+        name="DeviceDetails"
+        component={DeviceDetails}
+        options={{ headerShown: true, title: true }}
       />
     </Stack.Navigator>
   );

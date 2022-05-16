@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 
-import CustomCard from "./UI/CustomCard";
+import CustomCard from "./UI/SystemInformationCard";
 
-function SystemInformation({ device }) {
+function SystemInformation({ device, user }) {
   return (
     <View style={styles.container}>
       <CustomCard
@@ -12,8 +12,8 @@ function SystemInformation({ device }) {
         color4={"#ffbfbf"}
         iconColor={"#ff0000"}
         iconName={"account-multiple"}
-        text={"Người dùng"}
-        data={device}
+        text={"All Sensor"}
+        data={user}
       />
       <CustomCard
         color1={"#00ff00"}
@@ -22,7 +22,7 @@ function SystemInformation({ device }) {
         color4={"#bfffbf"}
         iconColor={"#00ff00"}
         iconName={"leaf"}
-        text={"Đợt gieo trồng"}
+        text={"Plan"}
         data={0}
       />
       <CustomCard
@@ -32,8 +32,8 @@ function SystemInformation({ device }) {
         color4={"#cfecf7"}
         iconColor={"#1ea7db"}
         iconName={"devices"}
-        text={"Thiết bị"}
-        data={0}
+        text={"Sensor In Farm"}
+        data={device}
       />
       <CustomCard
         color1={"#ec6302"}
@@ -42,7 +42,7 @@ function SystemInformation({ device }) {
         color4={"#f0a050"}
         iconColor={"#ec6302"}
         iconName={"check-all"}
-        text={"Thu hoạch"}
+        text={"Havest"}
         data={0}
       />
     </View>
@@ -52,5 +52,11 @@ function SystemInformation({ device }) {
 export default SystemInformation;
 
 const styles = StyleSheet.create({
-  container: { flexWrap: "wrap", flexDirection: "row", width: "100%", flex: 1 },
+  container: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    width: "100%",
+    flex: 1,
+    paddingVertical: "2%",
+  },
 });

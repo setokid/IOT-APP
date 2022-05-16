@@ -1,19 +1,31 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
+import ChartView from "../components/ChartView";
+import DataView from "../components/DataView";
 
 import SystemInformation from "../components/SystemInformation";
 import Title from "../components/UI/Title";
-import { fetchData } from "../util/http";
+
+import {
+  fetchAllSensorBelongToFarm,
+  fetchAllSensorInChain,
+} from "../util/http";
 
 function Home() {
-  const [device, setDevice] = useState();
-
+  const [user, setUser] = useState("");
+  const [device, setDevice] = useState("");
+  const [defaultSensor, setDefaultSensor] = useState("");
+  const [defaultSensorId, setDefaultSensorId] = useState("");
   useEffect(() => {
     let cleanup = true;
     async function getData() {
       if (cleanup) {
-        let resdata = await fetchData();
-        setDevice(resdata.length);
+        let sensorinchain = await fetchAllSensorInChain();
+        setUser(sensorinchain.length);
+        let sensorinfarm = await fetchAllSensorBelongToFarm();
+        setDevice(sensorinfarm.length);
+        setDefaultSensor(sensorinfarm[2].Record);
+        setDefaultSensorId(sensorinfarm[2].Key);
       }
     }
 
@@ -27,7 +39,10 @@ function Home() {
   return (
     <ScrollView style={styles.rootContainer}>
       <Title>Chào Dũng!</Title>
-      <SystemInformation device={device} />
+      <SystemInformation device={device} user={user} />
+      <Title>Dữ liệu từ thiết bị</Title>
+      <DataView sensordata={defaultSensor} sensorid={defaultSensorId} />
+      <ChartView />
     </ScrollView>
   );
 }
@@ -35,5 +50,5 @@ function Home() {
 export default Home;
 
 const styles = StyleSheet.create({
-  rootContainer: { flex: 1, padding: 10 },
+  rootContainer: { height: 2000, padding: 10 },
 });
