@@ -80,7 +80,7 @@ const styles = ScaledSheet.create({
     color: "black",
   },
   data: {
-    paddingTop: deviceWidth < 380 ? "10@s" : "15@s",
+    paddingTop: deviceWidth < 380 ? "0.5@s" : "15@s",
     fontSize: deviceWidth < 380 ? 26 : 30,
     fontWeight: "bold",
   },

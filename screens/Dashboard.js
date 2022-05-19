@@ -24,8 +24,8 @@ function Home() {
         setUser(sensorinchain.length);
         let sensorinfarm = await fetchAllSensorBelongToFarm();
         setDevice(sensorinfarm.length);
-        setDefaultSensor(sensorinfarm[2].Record);
-        setDefaultSensorId(sensorinfarm[2].Key);
+        setDefaultSensor(sensorinfarm[0].Record);
+        setDefaultSensorId(sensorinfarm[0].Key);
       }
     }
 
@@ -38,11 +38,11 @@ function Home() {
 
   return (
     <ScrollView style={styles.rootContainer}>
-      <Title>Chào Dũng!</Title>
+      <Title>Hello Dũng!</Title>
       <SystemInformation device={device} user={user} />
-      <Title>Dữ liệu từ thiết bị</Title>
+      <Title>Data from device</Title>
       <DataView sensordata={defaultSensor} sensorid={defaultSensorId} />
-      <ChartView />
+      <ChartView sensorid={defaultSensorId} />
     </ScrollView>
   );
 }

@@ -8,6 +8,7 @@ import CustomDrawer from "./CustomDrawer";
 import IconRight from "./IconRight";
 import User from "../../screens/User";
 import DeviceDetails from "../../screens/DeviceDetails";
+import QrScanner from "../../screens/QrScanner";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,6 +50,20 @@ function Screen({}) {
           drawerIcon: (color, size) => (
             <MaterialIcons
               name="devices"
+              color={color}
+              size={size}
+              style={{ marginRight: -20 }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="QrScanner"
+        component={QrScanner}
+        options={{
+          drawerIcon: (color, size) => (
+            <MaterialIcons
+              name="qr-code-scanner"
               color={color}
               size={size}
               style={{ marginRight: -20 }}

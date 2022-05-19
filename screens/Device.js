@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import DeviceCard from "../components/UI/DeviceCard";
 import Title from "../components/UI/Title";
-import { sensordata } from "../store/dummydata";
 import { fetchAllSensorBelongToFarm } from "../util/http";
 
 function Device() {
   const [sensorData, setSensorData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     let cleanup = true;
     async function getData() {
       if (cleanup) {
         let sensorinfarm = await fetchAllSensorBelongToFarm();
         setSensorData(sensorinfarm);
+        setIsLoading(false);
       }
     }
 
@@ -22,16 +23,23 @@ function Device() {
       cleanup = false;
     };
   }, []);
+
   return (
-    <View style={{ height: "100%" }}>
+    <View style={{ height: "100%", flex: 1 }}>
       <Title>Device List</Title>
-      <FlatList
-        data={sensorData}
-        renderItem={({ item }) => <DeviceCard color={"#ffffff"} data={item} />}
-        //Setting the number of column
-        numColumns={2}
-        keyExtractor={(item, index) => index}
-      />
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#00ff00" />
+      ) : (
+        <FlatList
+          data={sensorData}
+          renderItem={({ item }) => (
+            <DeviceCard color={"#ffffff"} data={item} />
+          )}
+          //Setting the number of column
+          numColumns={2}
+          keyExtractor={(item, index) => index}
+        />
+      )}
     </View>
   );
 }

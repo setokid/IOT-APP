@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, ActivityIndicator } from "react-native";
 
 import { fetchSensorData } from "../util/http";
 
@@ -10,6 +10,7 @@ import Datatable from "./UI/DataTable";
 
 function DataView({ sensordata, sensorid }) {
   const [resData, setResData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   useEffect(() => {
     let cleanup = true;
@@ -20,6 +21,7 @@ function DataView({ sensordata, sensorid }) {
           return JSON.parse(item);
         });
         setResData(finalData);
+        setIsLoading(false);
       }
     }
 
@@ -29,7 +31,6 @@ function DataView({ sensordata, sensorid }) {
       cleanup = false;
     };
   }, [sensorid == ""]);
-
   return (
     <CustomCard>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -40,7 +41,11 @@ function DataView({ sensordata, sensorid }) {
           <Text>View All Sensor</Text>
         </Pressable>
       </View>
-      {resData === undefined ? <View></View> : <Datatable data={resData} />}
+      {isLoading ? (
+        <ActivityIndicator size="small" color="#00ff00" />
+      ) : (
+        <Datatable data={resData} />
+      )}
     </CustomCard>
   );
 }

@@ -14,7 +14,12 @@ function DeviceCard({ color, data }) {
     <View style={styles.box}>
       <TouchableOpacity
         style={{ borderRadius: 20, backgroundColor: color }}
-        onPress={() => navigation.navigate("DeviceDetails", { data: data.Key })}
+        onPress={() =>
+          navigation.navigate("DeviceDetails", {
+            data: data.Key,
+            sensorname: sensor.namesensor,
+          })
+        }
       >
         <View style={styles.boxContainer}>
           <Text style={styles.data}>Deivce name: {sensor.namesensor}</Text>
