@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, FlatList, ActivityIndicator } from "react-native";
+import { View, FlatList, ActivityIndicator ,ScrollView} from "react-native";
 import DeviceCard from "../components/UI/DeviceCard";
 import Title from "../components/UI/Title";
 import { fetchAllSensorBelongToFarm } from "../util/http";
@@ -25,7 +25,7 @@ function Device() {
   }, []);
 
   return (
-    <View style={{ height: "100%", flex: 1 }}>
+    <>
       <Title>Device List</Title>
       {isLoading ? (
         <ActivityIndicator size="large" color="#00ff00" />
@@ -40,7 +40,7 @@ function Device() {
           keyExtractor={(item, index) => index}
         />
       )}
-    </View>
+    </>
   );
 }
 

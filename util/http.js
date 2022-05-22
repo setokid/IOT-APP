@@ -5,7 +5,7 @@ const BACKEND_URL = "http://103.81.84.231:4000/tx";
 export async function fetchAllSensorInChain() {
   const responseData = await axios.post(BACKEND_URL, {
     orgMSP: "farm2MSP",
-    userId: "sam2",
+    userId: "sam1",
     channelName: "mychannel",
     chaincodeName: "iot-fabric",
     data: {
@@ -18,7 +18,7 @@ export async function fetchAllSensorInChain() {
 export async function fetchAllSensorBelongToFarm() {
   const responseData = await axios.post(BACKEND_URL, {
     orgMSP: "farm2MSP",
-    userId: "sam2",
+    userId: "sam1",
     channelName: "mychannel",
     chaincodeName: "iot-fabric",
     data: {
@@ -31,7 +31,7 @@ export async function fetchAllSensorBelongToFarm() {
 export async function fetchSensorData(sensorid, date) {
   const responseData = await axios.post(BACKEND_URL, {
     orgMSP: "farm2MSP",
-    userId: "sam2",
+    userId: "sam1",
     channelName: "mychannel",
     chaincodeName: "iot-fabric",
     data: {
@@ -42,10 +42,11 @@ export async function fetchSensorData(sensorid, date) {
   return responseData.data;
 }
 
-export async function fetchSensorDataByRange(sensorid, datestart, dateend) {
+export async function fetchSensorDataByRange(sensorid, datestart, dateend)
+{
   const responseData = await axios.post(BACKEND_URL, {
     orgMSP: "farm2MSP",
-    userId: "sam2",
+    userId: "sam1",
     channelName: "mychannel",
     chaincodeName: "iot-fabric",
     data: {

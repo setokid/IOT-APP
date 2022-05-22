@@ -5,7 +5,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 import CustomCard from "../components/UI/CustomCard";
 import { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Platform, ScrollView ,Text} from "react-native";
 import { fetchSensorData, fetchSensorDataByRange } from "../util/http";
 import Title from "../components/UI/Title";
 
@@ -25,11 +25,13 @@ function DeviceDetails({ route }) {
         var cols = ["eco2", "humd", "ph", "tds", "temp", "tvoc"];
         var randomCol = cols[Math.floor(Math.random() * cols.length)];
         setCol(randomCol);
+        var start = date.getFullYear() + '-' + ('0' + date.getMonth()).slice(-2) + '-' + date.getDate()
+        var end = date.getFullYear()+ '-' + ('0'+ (date.getMonth()+1)).slice(-2)  + '-' + (date.getDate()+1)
         let sensorData = await fetchSensorDataByRange(
           data,
-          "2022-04-1",
-          "2022-05-18"
-        );
+          start,
+          end
+        )
         const parseData = sensorData.map((item) => {
           delete item.Key;
           return pick(
@@ -86,7 +88,6 @@ function DeviceDetails({ route }) {
             "tvoc"
           );
         });
-        console.log(pickData, "data");
         const finalData1 = parseData1.map((item1) => {
           return {
             ...item1,
@@ -115,44 +116,46 @@ function DeviceDetails({ route }) {
   const page = Math.ceil(data.length / 5);
 
   return (
-    <>
-      <Title>Data of {sensorname}</Title>
-      <CustomCard>
-        {isLoading ? (
-          <ActivityIndicator size="small" color="#00ff00" />
-        ) : (
-          <DataTable
-            data={dataParse} // list of objects
-            colNames={["datecreated", col]} //List of Strings List of Objects
-            noOfPages={page} //number
-            backgroundColor={"white"} //Table Background Color
-            doSort={true}
-            colSettings={[
-              { name: "datecreated", type: COL_TYPES.STRING },
-              { name: col, type: COL_TYPES.INT },
-            ]}
-          />
-        )}
-      </CustomCard>
-      <CustomCard>
-        <DateTimePicker value={date} mode="date" onChange={onChange} />
-        {isLoading ? (
-          <ActivityIndicator size="small" color="#00ff00" />
-        ) : (
-          <DataTable
-            data={resPerDay} // list of objects
-            colNames={["datecreated", col]} //List of Strings List of Objects
-            noOfPages={page} //number
-            backgroundColor={"white"} //Table Background Color
-            doSort={true}
-            colSettings={[
-              { name: "datecreated", type: COL_TYPES.STRING },
-              { name: col, type: COL_TYPES.INT },
-            ]}
-          />
-        )}
-      </CustomCard>
-    </>
+    <ScrollView>
+      <>
+        <Title>Data of {sensorname}</Title>
+        <CustomCard>
+          {isLoading ? (
+            <ActivityIndicator size="small" color="#00ff00" />
+          ) : (
+            <DataTable
+              data={dataParse} // list of objects
+              colNames={["datecreated", col]} //List of Strings List of Objects
+              noOfPages={page} //number
+              backgroundColor={"white"} //Table Background Color
+              doSort={true}
+              colSettings={[
+                { name: "datecreated", type: COL_TYPES.STRING },
+                { name: col, type: COL_TYPES.INT },
+              ]}
+            />
+          )}
+        </CustomCard>
+        <CustomCard>
+          {Platform.OS === 'android' ? <Text>a</Text> : <DateTimePicker value={date} onChange={onChange} />}
+          {isLoading ? (
+            <ActivityIndicator size="small" color="#00ff00" />
+          ) : (
+            <DataTable
+              data={resPerDay} // list of objects
+              colNames={["datecreated", col]} //List of Strings List of Objects
+              noOfPages={page} //number
+              backgroundColor={"white"} //Table Background Color
+              doSort={true}
+              colSettings={[
+                { name: "datecreated", type: COL_TYPES.STRING },
+                { name: col, type: COL_TYPES.INT },
+              ]}
+            />
+          )}
+        </CustomCard>
+      </>
+    </ScrollView>
   );
 }
 

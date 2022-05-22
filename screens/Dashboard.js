@@ -24,8 +24,8 @@ function Home() {
         setUser(sensorinchain.length);
         let sensorinfarm = await fetchAllSensorBelongToFarm();
         setDevice(sensorinfarm.length);
-        setDefaultSensor(sensorinfarm[0].Record);
-        setDefaultSensorId(sensorinfarm[0].Key);
+        setDefaultSensor(sensorinfarm[6].Record);
+        setDefaultSensorId(sensorinfarm[6].Key);
       }
     }
 

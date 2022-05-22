@@ -26,22 +26,6 @@ function CustomDrawer(props) {
           <Text style={styles.headerText}>Truy xuất nguồn gốc</Text>
         </View>
         <View style={{ flex: 1 }}>
-          {/* <DrawerItem
-            label="Dashboard"
-            onPress={() => props.navigation.navigate("Dashboard")}
-            icon={({ size, color }) => (
-              <AntDesign name="dashboard" color={color} size={18} />
-            )}
-            labelStyle={{ marginLeft: -16 }}
-          />
-          <DrawerItem
-            label="Device"
-            onPress={() => props.navigation.navigate("Device")}
-            icon={({ size, color }) => (
-              <MaterialIcons name="devices" size={18} color={color} />
-            )}
-            labelStyle={{ marginLeft: -16 }}
-          /> */}
           <DrawerItemList {...props} />
         </View>
         <View>
